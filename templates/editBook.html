@@ -1,0 +1,14 @@
+<form action="{{ url_for('editBook',book_id = book.id)}}" method="post">
+   <div class="form-group">
+       <label for="name">Title:</label>
+       <input type="text" class="form-control" name="name" value="{{book.title }}">
+       <label for="author">Author:</label>
+       <input type="text" class="form-control" name="author" value="{{book.author}}">
+       <label for="genge">Genge:</label>
+       <input type="text" class="form-control" name="genre" value="{{book.genre}}">
+       <button type="submit"> SAVE</button>
+       <a href='books.html'>
+           <button>Cancel</button>
+       </a>
+   </div>
+</form>
