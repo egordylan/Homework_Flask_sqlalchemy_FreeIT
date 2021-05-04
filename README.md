@@ -7,3 +7,6 @@ tutorial sqlalchemy flask (FreeIT)
 * python3 app.py
 * Открываем в браузере http://127.0.0.1:4996/
 * Наслаждаемся UI без CSS
+
+
+#HOMEWORK FOR FREEIT
