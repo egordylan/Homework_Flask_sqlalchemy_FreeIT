@@ -28,14 +28,6 @@ editedBook = session.query(Book).filter_by(id=1).one()
 editedBook.author = "Дэн Бейдер"
 session.add(editedBook)
 session.commit()
-editedBook = session.query(Book).filter_by(id=1).one()
-editedBook.title = "Чистый Python"
-session.add(editedBook)
-session.commit()
-editedBook = session.query(Book).filter_by(id=1).one()
-editedBook.genre = "компьютерная литература"
-session.add(editedBook)
-session.commit()
 
 # DELETE
 bookToDelete = session.query(Book).filter_by(title='Чистый Python').one()
