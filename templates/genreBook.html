@@ -1,14 +1,13 @@
-<html>
 <body>
-   <h1>Books by genre</h1>
+   <h2>BOOKS BY GENRE</h2>
 
    <ol>
        {% for book in books %}
-       <h3> {{book.genre}} </h3>
-       <li> {{book.title}} — {{book.author}} </li>
+       <h4> {{book.genre}} </h4>
+       <li> {{book.author}} — {{book.title}} </li>
 
        <br>
        {% endfor %}
    </ol>
 </body>
-</html>
+
