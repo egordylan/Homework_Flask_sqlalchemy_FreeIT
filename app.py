@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request, redirect, url_for
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Book
 from itertools import groupby
@@ -66,14 +66,13 @@ def deleteBook(book_id):
 
 # Добавляем группировку книг по жанрам
 @app.route('/books/genre/', methods=['GET'])
-def genreBook(genre):
-    genreOfBook = session.query(Book).filter_by(id=book_id).all()
-    if genreOfBook != '' and genreOfBook is not None:
-        genreOfBook = session.query(Book).filter_by(genre=genre).all()
-        session.commit()
+def genreBook():
+    genreOfBook = session.query(Book).group_by(Book.genre).order_by(Book.genre).all()
+    session.commit()
     return render_template('genreBook.html', books=genreOfBook)
 
 
 if __name__ == '__main__':
     app.debug = True
     app.run(port=4996)
+
