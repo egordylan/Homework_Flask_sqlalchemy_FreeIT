@@ -42,15 +42,12 @@ def newBook():
 def editBook(book_id):
     editedBook = session.query(Book).filter_by(id=book_id).one()
     if request.method == 'POST':
-        if request.form['name']:
+        if request.form['name'] or request.form['author'] or request.form['genre']:
             editedBook.title = request.form['name']
+            editedBook.author = request.form['author']
+            editedBook.genre = request.form['genre']
+            session.commit()
             return redirect(url_for('showBooks'))
- #       if request.form['author']:
- #           editedBook.author = request.form['author']
- #           return redirect(url_for('showBooks'))
- #       if request.form['genre']:
- #           editedBook.genre = request.form['genre']
- #           return redirect(url_for('showBooks'))
     else:
         return render_template('editBook.html', book=editedBook)
 
@@ -70,9 +67,11 @@ def deleteBook(book_id):
 # Добавляем группировку книг по жанрам
 @app.route('/books/genre/', methods=['GET'])
 def genreBook(genre):
-    genreBook = session.query(Book).filter_by(genre=genre).all()
-    session.commit()
-    return render_template('genreBook.html', books=genreBook)
+    genreOfBook = session.query(Book).filter_by(id=book_id).all()
+    if genreOfBook != '' and genreOfBook is not None:
+        genreOfBook = session.query(Book).filter_by(genre=genre).all()
+        session.commit()
+    return render_template('genreBook.html', books=genreOfBook)
 
 
 if __name__ == '__main__':
