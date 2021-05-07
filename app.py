@@ -64,7 +64,6 @@ def deleteBook(book_id):
         return render_template('deleteBook.html', book=bookToDelete)
 
 
-
 # Уникальные значения жанров
 #@app.route('/books/genres/', methods=['GET'])
 #def uniqueGenre(genre):
@@ -84,10 +83,19 @@ def deleteBook(book_id):
 
 # Добавляем группировку книг по жанрам
 @app.route('/books/genre/', methods=['GET'])
-def genreBook(filed=None):
-    genreOfBook = session.query(Book).group_by(Book.genre).order_by(Book.genre).all()
-#    for value in Session.query(Table.column).distinct():
-#        pass
+def genreBook():
+#    genreOfBook = session.query(Book).group_by(Book.genre).order_by(Book.genre).all()
+    genreOfBook = session.query(Book).group_by(Book.genre).distinct(Book.genre).order_by(Book.genre).all()
+#    for value in session.query(Book.genre).distinct():
+#        unique_genres = []
+#        if value not in unique_genres:
+#            unique_genres.append(value)
+#        elif value in unique_genres:
+#            return # шоб я понимала и знала что тут должно быть. пойду побьюсь головой о стену
+#        elif value is None:
+#            return
+
+
     session.commit()
     return render_template('genreBook.html', books=genreOfBook)
 
