@@ -64,10 +64,30 @@ def deleteBook(book_id):
         return render_template('deleteBook.html', book=bookToDelete)
 
 
+
+# Уникальные значения жанров
+#@app.route('/books/genres/', methods=['GET'])
+#def uniqueGenre(genre):
+#    unique_list = []  # Добавляем пустой список для уникальных значений
+#    listOfGenre = session.query(Book).filter_by(genre=genre).all()
+#
+    # Смотрим все элементы editedBook = session.query(Book).filter_by(id=book_id).one()
+#    for genre in listOfGenre:
+#        # Проверка на существование элемента в листе уникальных
+#        if genre not in listOfGenre:
+#            unique_list.append(genre)
+#        for genre in unique_list:
+#            return genre
+#    return render_template('genreBook.html', books=listOfGenre)
+# SELECT authors, title FROM book GROUP BY genre ORDER BY genre;
+
+
 # Добавляем группировку книг по жанрам
 @app.route('/books/genre/', methods=['GET'])
-def genreBook():
+def genreBook(filed=None):
     genreOfBook = session.query(Book).group_by(Book.genre).order_by(Book.genre).all()
+#    for value in Session.query(Table.column).distinct():
+#        pass
     session.commit()
     return render_template('genreBook.html', books=genreOfBook)
 

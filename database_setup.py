@@ -25,6 +25,30 @@ class Book(Base):
     genre = Column(String(250), nullable=True)
 
 
+#class Genre(Book):
+#    __tablename__ = 'genres'
+
+#    id = Column(Integer, primary_key=True)
+#    genre = Column(String(250), nullable=True)
+
+    # Добавляем пустой список для уникальных значений
+#    unique_list = []
+
+    # Смотрим все элементы editedBook = session.query(Book).filter_by(id=book_id).one()
+#    for item in genre:
+        # Проверка на существование элемента в листе уникальных
+        #if item not in Book:
+        #    unique_list.append(item)
+        #elif item in unique_list:
+        #    pass
+#        unique_list = sorted(list(set(Book)))
+
+#def get_unique_numbers(numbers):
+#    unique = []
+#    for number in numbers:
+#        if number not in unique:
+#            unique.append(number)
+#    return unique
 
 # создает экземпляр create_engine в конце файла
 engine = create_engine('sqlite:///books-collection.db')
