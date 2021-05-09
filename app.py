@@ -84,7 +84,7 @@ def genreBook(filed=None):
 #            dictionary[Book.genre] = book_list
 #        else:
 #            dictionary.get(Book.genre).append(book)
-#    session.commit()
+
     return render_template('genreBook.html', books=dictionary)  #books - переменная в виде именованных аргументов, которые вы хотите передать движку обработки шаблонов
 
 
