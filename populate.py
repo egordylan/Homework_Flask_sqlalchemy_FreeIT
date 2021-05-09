@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 # импортируем классы Book и Base из файла database_setup.py
 from database_setup import Book, Base
 
+
 engine = create_engine('sqlite:///books-collection.db')
 # Свяжим engine с метаданными класса Base,
 # чтобы декларативы могли получить доступ через экземпляр DBSession
