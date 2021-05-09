@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Book
 from itertools import groupby
 
+
 app = Flask(__name__)
 
 # Подключаемся и создаем сессию базы данных
@@ -64,40 +65,27 @@ def deleteBook(book_id):
         return render_template('deleteBook.html', book=bookToDelete)
 
 
-# Уникальные значения жанров
-#@app.route('/books/genres/', methods=['GET'])
-#def uniqueGenre(genre):
-#    unique_list = []  # Добавляем пустой список для уникальных значений
-#    listOfGenre = session.query(Book).filter_by(genre=genre).all()
-#
-    # Смотрим все элементы editedBook = session.query(Book).filter_by(id=book_id).one()
-#    for genre in listOfGenre:
-#        # Проверка на существование элемента в листе уникальных
-#        if genre not in listOfGenre:
-#            unique_list.append(genre)
-#        for genre in unique_list:
-#            return genre
-#    return render_template('genreBook.html', books=listOfGenre)
-# SELECT authors, title FROM book GROUP BY genre ORDER BY genre;
-
-
 # Добавляем группировку книг по жанрам
 @app.route('/books/genre/', methods=['GET'])
-def genreBook():
-#    genreOfBook = session.query(Book).group_by(Book.genre).order_by(Book.genre).all()
-    genreOfBook = session.query(Book).group_by(Book.genre).distinct(Book.genre).order_by(Book.genre).all()
-#    for value in session.query(Book.genre).distinct():
-#        unique_genres = []
-#        if value not in unique_genres:
-#            unique_genres.append(value)
-#        elif value in unique_genres:
-#            return # шоб я понимала и знала что тут должно быть. пойду побьюсь головой о стену
-#        elif value is None:
-#            return
+def genreBook(filed=None):
+    genre_of_book = session.query(Book).all()
+    dictionary = dict()
+    for book in genre_of_book:  # Local variable 'book' value is not used
+        book_list = []
+        dictionary[book.genre] = book_list
+    for book in genre_of_book:
+        book_list = dictionary.get(book.genre)
+        book_list.append(book)
 
-
-    session.commit()
-    return render_template('genreBook.html', books=genreOfBook)
+#    for book in genre_of_book:
+#        dictionary = {}
+#        book_list = []
+#        if dictionary.get(Book.genre) is None:
+#            dictionary[Book.genre] = book_list
+#        else:
+#            dictionary.get(Book.genre).append(book)
+#    session.commit()
+    return render_template('genreBook.html', books=dictionary)  #books - переменная в виде именованных аргументов, которые вы хотите передать движку обработки шаблонов
 
 
 if __name__ == '__main__':
