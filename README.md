@@ -9,4 +9,6 @@ tutorial sqlalchemy flask (FreeIT)
 * Наслаждаемся UI без CSS
 
 
-#HOMEWORK FOR FREEIT
+# HOMEWORK FOR FREEIT
+1. Find bug in app.py and fix it.
+2. Add a Books sorting page and template for it.
